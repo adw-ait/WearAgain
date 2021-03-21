@@ -1,0 +1,33 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: #f3f4f6;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@layer utilities {
+  @variants responsive {
+    .signup-desktop {
+      width: 20vw;
+    }
+
+    .signup-laptop {
+      width: 27vw;
+    }
+  }
+}

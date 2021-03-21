@@ -1,0 +1,100 @@
+html {
+  display: flex;
+  justify-content: center;
+}
+
+.img-container {
+  position: relative;
+  height: 630px;
+  width: 530px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.color {
+  display: inline-block;
+  border: 1px solid black;
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  display: inline-block;
+}
+
+.color:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.addImage {
+  display: flex;
+  flex-wrap: wrap;
+  width: 220px;
+}
+
+.definedImages {
+  height: 100px;
+  width: 100px;
+}
+
+.imageList {
+  border: 1px solid white;
+  background-color: gray;
+  border-radius: 10px;
+  margin: 2px;
+}
+
+.imageList:hover {
+  border: 2px solid black;
+}
+
+.deleteBtn {
+  padding: 10px;
+  font-size: 1.5em;
+  color: white;
+  font-family: monospace;
+  font-weight: bolder;
+  background-color: red;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.deleteBtn:hover {
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+.deleteImage {
+  margin: 10px;
+}
+
+.tabSettings {
+  width: 220px;
+}
+
+.tabButtons {
+  padding: 10px;
+  color: black;
+  font-size: 1.1em;
+  border: none;
+  width: 50%;
+  background-color: rgb(218, 218, 218);
+}
+
+.tabButtons:hover {
+  background-color: rgba(218, 218, 218, 0.733);
+}
+
+.buttons {
+  margin-bottom: 10px;
+}
