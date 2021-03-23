@@ -5,7 +5,7 @@ import Login from "../Components/Login/Login";
 import SignUp from "../Components/SignUp/SignUp";
 
 function RegisterLoginLayout(props) {
-  const [whoIsActive, setwhoIsActive] = useState("signup");
+  const [whoIsActive, setwhoIsActive] = useState("login");
   const [ForgotPassword, setForgotPassword] = useState(false);
   const TriggerForgotPass = () => {
     setForgotPassword(!ForgotPassword);
@@ -41,7 +41,11 @@ function RegisterLoginLayout(props) {
               </span>
             </div>
           </div>
-          {whoIsActive === "signup" ? <SignUp /> : <Login />}
+          {whoIsActive === "signup" ? (
+            <SignUp />
+          ) : (
+            <Login TriggerForgotPass={TriggerForgotPass} />
+          )}
         </>
       ) : (
         <ForgotPass TriggerForgotPass={TriggerForgotPass} />
