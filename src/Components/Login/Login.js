@@ -45,7 +45,7 @@ class Login extends Component {
         <div className="flex bg-white  rounded-2xl shadow-lg 2xl:signup-desktop lg:signup-laptop">
           <div className="flex flex-col px-10 py-5 items-center w-full gap-5">
             <span className="text-3xl font-semibold ">Login</span>
-            <div className="flex block border border-gray-300 p-1.5 rounded-md cursor-pointer">
+            <div className="flex  border border-gray-300 p-1.5 rounded-md cursor-pointer">
               <img
                 src={google}
                 className="object-contain h-6 w-6 mr-2"
@@ -81,6 +81,9 @@ class Login extends Component {
                 Login
               </Button>
             </form>
+            <div>
+              <button className="text-lg font-bold">Forgot Password?</button>
+            </div>
           </div>
         </div>
       </div>
