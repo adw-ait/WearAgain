@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { HomeContext } from "../../Layout/HomePageLayout";
@@ -60,4 +61,7 @@ function Header(props) {
   );
 }
 
-export default Header;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+export default connect(mapStateToProps, null)(Header);
