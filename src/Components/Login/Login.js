@@ -1,28 +1,44 @@
-import React, { useState } from "react";
-import { auth } from "../../firebase/utils";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from "../../redux/User/user.actions";
 import Button from "../forms/Button";
 import FormInput from "../forms/FormInput";
 import google from "./../../images/Signup_login/google.svg";
 
+const mapState = ({ user }) => ({
+  currentUser: user.signInSuccess,
+});
+
 const Login = (props) => {
+  const { currentUser } = useSelector(mapState);
+  const dispatch = useDispatch();
   const { TriggerForgotPass } = props;
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+
+  useEffect(() => {
+    if (currentUser) {
+      resetForm();
+      props.history.push("/");
+    }
+  }, [currentUser]);
 
   const resetForm = () => {
     setemail("");
     setpassword("");
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(emailSignInStart({ email, password }));
+  };
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      resetForm();
-    } catch (error) {
-      // console.log(error);
-    }
+  const handleGoogleSignIn = () => {
+    dispatch(googleSignInStart());
   };
 
   return (
@@ -32,7 +48,10 @@ const Login = (props) => {
           <span className="text-3xl font-semibold ">Login</span>
           <div className="flex  border border-gray-300 p-1.5 rounded-md cursor-pointer">
             <img src={google} className="object-contain h-6 w-6 mr-2" alt="" />
-            <Button styles={"font-semibold focus:outline-none"}>
+            <Button
+              onClick={handleGoogleSignIn}
+              styles={"font-semibold focus:outline-none"}
+            >
               Continue with Google
             </Button>
           </div>

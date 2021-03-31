@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../forms/Button";
 import google from "./../../images/Signup_login/google.svg";
-import {
-  auth,
-  handleUserProfile,
-  signInWithGoogle,
-} from "./../../firebase/utils";
+import { signInWithGoogle } from "./../../firebase/utils";
 import FormInput from "../forms/FormInput";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpUserStart } from "../../redux/User/user.actions";
+
+const mapState = ({ user }) => ({
+  currentUser: user.currentUser,
+  userErr: user.userErr,
+});
 
 const SignUp = (props) => {
+  const { currentUser, userErr } = useSelector(mapState);
+  const dispatch = useDispatch();
   const [displayName, setdisplayName] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [errors, seterrors] = useState([]);
+
+  useEffect(() => {
+    if (currentUser) {
+      reset();
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (Array.isArray(userErr) && userErr.length > 0) {
+      seterrors(userErr);
+    }
+  }, [userErr]);
 
   const reset = () => {
     setdisplayName("");
@@ -27,24 +44,16 @@ const SignUp = (props) => {
     e.preventDefault();
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-
-    if (password !== confirmPassword) {
-      const err = [`Password Don't match`];
-      seterrors(err);
-      return;
-    }
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
+    dispatch(
+      signUpUserStart({
+        displayName,
         email,
-        password
-      );
-      await handleUserProfile(user, { displayName });
-      reset();
-    } catch (error) {
-      // console.log(error);
-    }
+        password,
+        confirmPassword,
+      })
+    );
   };
 
   return (

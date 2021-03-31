@@ -29,5 +29,9 @@ body {
     .signup-laptop {
       width: 27vw;
     }
+
+    .landingPage-images {
+      height: 92vh;
+    }
   }
 }

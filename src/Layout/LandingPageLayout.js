@@ -7,8 +7,8 @@ function LandingPageLayout(props) {
     <React.Fragment>
       <Header {...props} />
       <div
-        className="flex justify-center items-stretch px-48 py-5"
-        style={{ height: "850px" }}
+        className="flex justify-center items-stretch px-48 py-5 w-full landingPage-images"
+        // style={{ height: "850px" }}
       >
         <div className="flex w-full max-h-full">
           {images.map((img) => {

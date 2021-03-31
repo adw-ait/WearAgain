@@ -1,14 +1,22 @@
 import React, { useContext } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 
 import { HomeContext } from "../../Layout/HomePageLayout";
-import { auth } from "./../../firebase/utils";
+import { signOutUserStart } from "../../redux/User/user.actions";
+
+const mapState = ({ user }) => ({
+  currentUser: user.currentUser,
+});
 
 function Header(props) {
+  const dispatch = useDispatch();
   const { changeCurrentCategory } = useContext(HomeContext);
-  const { currentUser } = props;
-
+  const { currentUser } = useSelector(mapState);
+  const signOut = () => {
+    dispatch(signOutUserStart());
+  };
   return (
     <nav className="flex p-5 text-black justify-between font-semibold shadow-lg">
       <div className="flex">
@@ -44,7 +52,7 @@ function Header(props) {
       </div>
       {currentUser && (
         <div className="mr-6 hover:text-gray-500 text-lg">
-          <span onClick={() => auth.signOut()}>LogOut</span>
+          <span onClick={() => signOut()}>LogOut</span>
         </div>
       )}
       {!currentUser && (
@@ -61,7 +69,4 @@ function Header(props) {
   );
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
-});
-export default connect(mapStateToProps, null)(Header);
+export default Header;

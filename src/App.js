@@ -1,33 +1,22 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePageLayout from "./Layout/HomePageLayout";
 import LandingPageLayout from "./Layout/LandingPageLayout";
 import ProductDetailsLayout from "./Layout/ProductDetailsLayout";
 import EditModule from "./EditModule/EditModule";
 import RegisterLoginLayout from "./Layout/RegisterLoginLayout";
-import { auth, handleUserProfile } from "./firebase/utils";
-import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/User/user.actions";
+
+import { useDispatch } from "react-redux";
+import { checkUserSession } from "./redux/User/user.actions";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import MainLayout from "./Layout/MainLayout";
 
 const App = (props) => {
-  const { setCurrentUser, currentUser } = props;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const authListener = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await handleUserProfile(userAuth);
-        userRef.onSnapshot((snapshot) => {
-          setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
-          });
-        });
-      }
-      setCurrentUser(userAuth);
-    });
-
-    return () => authListener();
-  }, []);
+    dispatch(checkUserSession());
+  });
 
   return (
     <div className="">
@@ -45,13 +34,11 @@ const App = (props) => {
           ></Route>
           <Route
             path="/Home/SignUp"
-            render={() =>
-              currentUser ? <Redirect to="/" /> : <RegisterLoginLayout />
-            }
+            render={() => <RegisterLoginLayout />}
             exact={true}
           ></Route>
           <Route
-            path="/Home/:id"
+            path="/Home/ProductDetail/:id"
             render={() => <ProductDetailsLayout />}
             exact={true}
           ></Route>
@@ -60,18 +47,19 @@ const App = (props) => {
             component={EditModule}
             exact={true}
           ></Route>
+          <Route
+            path="/Home/UserProfile"
+            render={() => (
+              <MainLayout>
+                <UserProfile />
+              </MainLayout>
+            )}
+            exact={true}
+          ></Route>
         </Switch>
       </BrowserRouter>
     </div>
   );
 };
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
-});
-
-const mapDispatchProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-});
-
-export default connect(mapStateToProps, mapDispatchProps)(App);
+export default App;
