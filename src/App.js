@@ -10,7 +10,10 @@ import { useDispatch } from "react-redux";
 import { checkUserSession } from "./redux/User/user.actions";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import MainLayout from "./Layout/MainLayout";
-
+import WithAuth from "./hoc/withAuth";
+import Admin from "./pages/Admin/Admin";
+import WithAdminAuth from "./hoc/withAdminAuth";
+import AdminToolbar from "./Components/AdminToolbar/AdminToolbar";
 const App = (props) => {
   const dispatch = useDispatch();
 
@@ -21,6 +24,7 @@ const App = (props) => {
   return (
     <div className="">
       <BrowserRouter>
+        <AdminToolbar />
         <Switch>
           <Route
             path="/"
@@ -44,15 +48,28 @@ const App = (props) => {
           ></Route>
           <Route
             path="/Home/ProductDetail/Edit"
-            component={EditModule}
+            render={() => EditModule}
             exact={true}
           ></Route>
           <Route
             path="/Home/UserProfile"
             render={() => (
-              <MainLayout>
-                <UserProfile />
-              </MainLayout>
+              <WithAuth>
+                <MainLayout>
+                  <UserProfile />
+                </MainLayout>
+              </WithAuth>
+            )}
+            exact={true}
+          ></Route>
+          <Route
+            path="/admin"
+            render={() => (
+              <WithAdminAuth>
+                <MainLayout>
+                  <Admin />
+                </MainLayout>
+              </WithAdminAuth>
             )}
             exact={true}
           ></Route>
