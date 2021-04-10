@@ -14,6 +14,7 @@ import WithAuth from "./hoc/withAuth";
 import Admin from "./pages/Admin/Admin";
 import WithAdminAuth from "./hoc/withAdminAuth";
 import AdminToolbar from "./Components/AdminToolbar/AdminToolbar";
+import AdminLayout from "./Layout/AdminLayout";
 const App = (props) => {
   const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ const App = (props) => {
           ></Route>
           <Route
             path="/Home/ProductDetail/:id"
-            render={() => <ProductDetailsLayout />}
+            component={<ProductDetailsLayout />}
             exact={true}
           ></Route>
           <Route
@@ -66,9 +67,9 @@ const App = (props) => {
             path="/admin"
             render={() => (
               <WithAdminAuth>
-                <MainLayout>
+                <AdminLayout>
                   <Admin />
-                </MainLayout>
+                </AdminLayout>
               </WithAdminAuth>
             )}
             exact={true}

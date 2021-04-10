@@ -13,12 +13,12 @@ function AdminToolbar(props) {
   const isAdmin = checkUserIsAdmin(currentUser);
   if (!isAdmin) return null;
   return (
-    <div>
-      <ul>
-        <li>
-          <Link to="/admin">My Admin</Link>
-        </li>
-      </ul>
+    <div className="bg-black w-full  flex justify-end">
+      <div className="p-2 mr-5 bg-gray-300">
+        <Link className="font-bold" to="/admin">
+          My Admin
+        </Link>
+      </div>
     </div>
   );
 }
