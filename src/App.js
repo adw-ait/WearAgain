@@ -23,7 +23,7 @@ const App = (props) => {
   });
 
   return (
-    <div className="">
+    <React.Fragment>
       <BrowserRouter>
         <AdminToolbar />
         <Switch>
@@ -44,7 +44,7 @@ const App = (props) => {
           ></Route>
           <Route
             path="/Home/ProductDetail/:id"
-            component={<ProductDetailsLayout />}
+            render={() => <ProductDetailsLayout />}
             exact={true}
           ></Route>
           <Route
@@ -76,7 +76,7 @@ const App = (props) => {
           ></Route>
         </Switch>
       </BrowserRouter>
-    </div>
+    </React.Fragment>
   );
 };
 
