@@ -24,34 +24,13 @@ function Header(props) {
           Wear Again
         </Link>
         <div className="flex text-lg font-semibold">
-          <p
-            onClick={() => {
-              changeCurrentCategory("Men");
-            }}
-            className="mr-6 hover:text-gray-500 cursor-pointer"
-          >
-            Men
-          </p>
-          <p
-            onClick={() => {
-              changeCurrentCategory("Women");
-            }}
-            className="mr-6 hover:text-gray-500 cursor-pointer"
-          >
-            Women
-          </p>
-          <p
-            onClick={() => {
-              changeCurrentCategory("Kids");
-            }}
-            className=" hover:text-gray-500 cursor-pointer"
-          >
-            Kids
-          </p>
+          <Link to="/Home/" className="hover:text-gray-600 text-lg">
+            Home
+          </Link>
         </div>
       </div>
       {currentUser && (
-        <div className="mr-6 hover:text-gray-500 text-lg">
+        <div className="mr-6 hover:text-gray-500 text-lg cursor-pointer">
           <span onClick={() => signOut()}>LogOut</span>
         </div>
       )}

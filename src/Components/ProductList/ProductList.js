@@ -32,7 +32,7 @@ const ProductList = () => {
               <div className="flex gap-2">
                 <img
                   className="object-fill"
-                  style={{ height: "20vh", width: "20vw" }}
+                  style={{ height: "20vh" }}
                   src={productThumbnail}
                   alt=""
                 />
