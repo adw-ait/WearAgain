@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 
-import { HomeContext } from "../../Layout/HomePageLayout";
 import { signOutUserStart } from "../../redux/User/user.actions";
 
 const mapState = ({ user }) => ({
@@ -12,7 +11,7 @@ const mapState = ({ user }) => ({
 
 function Header(props) {
   const dispatch = useDispatch();
-  const { changeCurrentCategory } = useContext(HomeContext);
+
   const { currentUser } = useSelector(mapState);
   const signOut = () => {
     dispatch(signOutUserStart());
