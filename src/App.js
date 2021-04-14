@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomePageLayout from "./Layout/HomePageLayout";
+
 import LandingPageLayout from "./Layout/LandingPageLayout";
-import ProductDetailsLayout from "./Layout/ProductDetailsLayout";
-import EditModule from "./EditModule/EditModule";
+
 import RegisterLoginLayout from "./Layout/RegisterLoginLayout";
 
 import { useDispatch } from "react-redux";
@@ -15,6 +14,9 @@ import Admin from "./pages/Admin/Admin";
 import WithAdminAuth from "./hoc/withAdminAuth";
 import AdminToolbar from "./Components/AdminToolbar/AdminToolbar";
 import AdminLayout from "./Layout/AdminLayout";
+import HomePage from "./pages/HomePage/HomePage";
+import ProductDetails from "./Components/ProductDetails/ProductDetails";
+
 const App = (props) => {
   const dispatch = useDispatch();
 
@@ -34,22 +36,34 @@ const App = (props) => {
           ></Route>
           <Route
             path="/Home"
-            render={() => <HomePageLayout />}
+            render={() => (
+              <MainLayout>
+                <HomePage />
+              </MainLayout>
+            )}
+            exact={true}
+          ></Route>
+          <Route
+            path="/Home/:filterType"
+            render={() => (
+              <MainLayout>
+                <HomePage />
+              </MainLayout>
+            )}
+            exact={true}
+          ></Route>
+          <Route
+            path="/product/:productID"
+            render={() => (
+              <MainLayout>
+                <ProductDetails />
+              </MainLayout>
+            )}
             exact={true}
           ></Route>
           <Route
             path="/Home/SignUp"
             render={() => <RegisterLoginLayout />}
-            exact={true}
-          ></Route>
-          <Route
-            path="/Home/ProductDetail/:id"
-            render={() => <ProductDetailsLayout />}
-            exact={true}
-          ></Route>
-          <Route
-            path="/Home/ProductDetail/Edit"
-            render={() => EditModule}
             exact={true}
           ></Route>
           <Route
