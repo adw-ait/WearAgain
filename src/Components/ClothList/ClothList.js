@@ -1,7 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { addProduct } from "./../../redux/Cart/cart.actions";
 const ClothList = ({ products }) => {
+  const dispatch = useDispatch();
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    dispatch(addProduct(product));
+  };
   if (!Array.isArray(products)) return null;
   if (products.length < 1) {
     return (
@@ -46,6 +52,7 @@ const ClothList = ({ products }) => {
                   <button
                     className="bg-black text-white w-full font-bold text-lg"
                     style={{ padding: "1.5vh" }}
+                    onClick={() => handleAddToCart(product)}
                   >
                     Add To Cart
                   </button>

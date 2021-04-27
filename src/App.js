@@ -16,6 +16,7 @@ import AdminToolbar from "./Components/AdminToolbar/AdminToolbar";
 import AdminLayout from "./Layout/AdminLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import Cart from "./pages/Cart/Cart";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -62,18 +63,25 @@ const App = (props) => {
             exact={true}
           ></Route>
           <Route
-            path="/Home/SignUp"
+            path="/cart"
+            render={() => (
+              <MainLayout>
+                <Cart />
+              </MainLayout>
+            )}
+            exact={true}
+          ></Route>
+          <Route
+            path="/SignUp"
             render={() => <RegisterLoginLayout />}
             exact={true}
           ></Route>
           <Route
-            path="/Home/UserProfile"
+            path="/UserProfile"
             render={() => (
-              <WithAuth>
-                <MainLayout>
-                  <UserProfile />
-                </MainLayout>
-              </WithAuth>
+              <MainLayout>
+                <UserProfile />
+              </MainLayout>
             )}
             exact={true}
           ></Route>

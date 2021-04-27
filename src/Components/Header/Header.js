@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 
 import { signOutUserStart } from "../../redux/User/user.actions";
-
-const mapState = ({ user }) => ({
-  currentUser: user.currentUser,
+import { selectCartItemsCount } from "./../../redux/Cart/cart.selectors";
+const mapState = (state) => ({
+  currentUser: state.user.currentUser,
+  totalNumCartItems: selectCartItemsCount(state),
 });
 
 function Header(props) {
   const dispatch = useDispatch();
 
-  const { currentUser } = useSelector(mapState);
+  const { currentUser, totalNumCartItems } = useSelector(mapState);
   const signOut = () => {
     dispatch(signOutUserStart());
   };
@@ -29,14 +30,20 @@ function Header(props) {
         </div>
       </div>
       {currentUser && (
-        <div className="mr-6 hover:text-gray-500 text-lg cursor-pointer">
+        <div className="flex gap-5 mr-6 hover:text-gray-500 text-lg cursor-pointer">
+          <Link to="/cart">
+            <span>Cart</span>
+            <span class="inline-flex items-center ml-0.5 justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+              {totalNumCartItems}
+            </span>
+          </Link>
           <span onClick={() => signOut()}>LogOut</span>
         </div>
       )}
       {!currentUser && (
         <div className="text-lg">
           <Link
-            to={{ pathname: "/Home/SignUp" }}
+            to={{ pathname: "/SignUp" }}
             className="mr-6 hover:text-gray-500"
           >
             Login / SignUp

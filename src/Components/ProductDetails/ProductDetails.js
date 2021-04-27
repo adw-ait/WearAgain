@@ -6,7 +6,7 @@ import {
   fetchProductStart,
   setProduct,
 } from "../../redux/Products/products.actions";
-
+import { addProduct } from "./../../redux/Cart/cart.actions";
 const mapState = (state) => ({
   product: state.productsData.product,
 });
@@ -28,6 +28,11 @@ function ProductDetails() {
       dispatch(setProduct({}));
     };
   }, []);
+
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    dispatch(addProduct(product));
+  };
   return (
     <div>
       <div className="flex justify-center items-start  p-10">
@@ -48,7 +53,10 @@ function ProductDetails() {
               corporis consequuntur incidunt.
             </small>
             <div className="flex gap-0.5 mt-4">
-              <button className="bg-indigo-600 hover:bg-indigo-500 focus:outline-none transition text-white uppercase px-8 py-3">
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="bg-indigo-600 hover:bg-indigo-500 focus:outline-none transition text-white uppercase px-8 py-3"
+              >
                 add to cart
               </button>
               <Link
@@ -58,7 +66,7 @@ function ProductDetails() {
                 Edit
               </Link>
             </div>
-            <div className="mt-5">
+            {/* <div className="mt-5">
               <small className="uppercase">choose size</small>
               <div className="flex flex-wrap md:flex-nowrap gap-1">
                 <div className="grid place-items-center border px-3 py-2 hover:bg-indigo-500 hover:text-white transition">
@@ -74,7 +82,7 @@ function ProductDetails() {
                   <small>XL</small>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
       </div>
