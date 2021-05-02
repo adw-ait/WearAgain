@@ -21,3 +21,15 @@
 **HomePage / Categories**
 
 ![HomePage](./ScreenShots/HomePage.png)
+
+**AdminPanel**
+
+![AdminPanel](./ScreenShots/AdminPanel.png)
+
+**Cart**
+
+![Cart](./ScreenShots/Cart.png)
+
+**UserProfile**
+
+![UserProfile](./ScreenShots/UserProfile.png)
