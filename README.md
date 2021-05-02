@@ -4,6 +4,10 @@
 
 ---
 
+**NOTE : Make a firebase config file with your credentials as _config.js_ and insert in **
+
+[config]: ./src/firebase/
+
 ### ScreenShots
 
 **Landing Page**
