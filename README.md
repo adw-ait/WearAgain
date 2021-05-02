@@ -4,7 +4,7 @@
 
 ---
 
-**NOTE : Make a firebase config file with your credentials as _config.js_ and insert in ./src/firebase/  **
+**NOTE : Make a firebase config file with your credentials as _config.js_ and insert in ./src/firebase/ **
 
 ### ScreenShots
 
