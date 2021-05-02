@@ -16,36 +16,6 @@ export const setCurrentUser = (user) => ({
   payload: user,
 });
 
-// export const signInUser = ({ email, password }) => async (dispatch) => {
-//
-// };
-
-// export const signUpUser = ({
-//   displayName,
-//   email,
-//   password,
-//   confirmPassword,
-// }) => async (dispatch) => {
-//   if (password !== confirmPassword) {
-//     const err = [`Password Don't match`];
-//     dispatch({
-//       type: userTypes.SIGN_UP_ERROR,
-//       payload: err,
-//     });
-//     return;
-//   }
-//   try {
-//     const { user } = await auth.createUserWithEmailAndPassword(email, password);
-//     await handleUserProfile(user, { displayName });
-//     dispatch({
-//       type: userTypes.SIGN_UP_SUCCESS,
-//       payload: true,
-//     });
-//   } catch (error) {
-//     // console.log(error);
-//   }
-// };
-
 export const signInWithGoogle = () => async (dispatch) => {};
 
 export const resetPassword = ({ email }) => async (dispatch) => {};

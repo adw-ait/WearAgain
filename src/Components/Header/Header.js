@@ -33,10 +33,12 @@ function Header(props) {
         <div className="flex gap-5 mr-6 hover:text-gray-500 text-lg cursor-pointer">
           <Link to="/cart">
             <span>Cart</span>
-            <span class="inline-flex items-center ml-0.5 justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+            <span className="inline-flex items-center ml-0.5 justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
               {totalNumCartItems}
             </span>
           </Link>
+
+          <Link to="/profile">Profile</Link>
           <span onClick={() => signOut()}>LogOut</span>
         </div>
       )}

@@ -77,11 +77,13 @@ const App = (props) => {
             exact={true}
           ></Route>
           <Route
-            path="/UserProfile"
+            path="/profile"
             render={() => (
-              <MainLayout>
-                <UserProfile />
-              </MainLayout>
+              <WithAuth>
+                <MainLayout>
+                  <UserProfile />
+                </MainLayout>
+              </WithAuth>
             )}
             exact={true}
           ></Route>

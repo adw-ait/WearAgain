@@ -9,7 +9,7 @@ const useAuth = (props) => {
   const { currentUser } = useSelector(mapState);
   useEffect(() => {
     if (!currentUser) {
-      props.history.push("/Home/SignUp");
+      props.history.push("/SignUp");
     }
   }, [currentUser]);
   return currentUser;
