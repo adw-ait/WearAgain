@@ -30,16 +30,20 @@ function Header(props) {
         </div>
       </div>
       {currentUser && (
-        <div className="flex gap-5 mr-6 hover:text-gray-500 text-lg cursor-pointer">
+        <div className="flex gap-5 mr-6  text-lg cursor-pointer">
           <Link to="/cart">
-            <span>Cart</span>
+            <span className="hover:text-gray-500">Cart</span>
             <span className="inline-flex items-center ml-0.5 justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
               {totalNumCartItems}
             </span>
           </Link>
 
-          <Link to="/profile">Profile</Link>
-          <span onClick={() => signOut()}>LogOut</span>
+          <Link className="hover:text-gray-500" to="/profile">
+            Profile
+          </Link>
+          <span className="hover:text-gray-500" onClick={() => signOut()}>
+            LogOut
+          </span>
         </div>
       )}
       {!currentUser && (

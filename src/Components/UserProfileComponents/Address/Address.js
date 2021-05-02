@@ -9,17 +9,14 @@ import {
 import { cardStyles, buttons, deleteButton } from "./style";
 
 const mapState = ({ addressData }) => ({
-  address: addressData.addresses,
+  addresses: addressData.addresses,
 });
 
 function Address() {
-  const { address } = useSelector(mapState);
+  const { addresses } = useSelector(mapState);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAddressesStart());
-    return () => {
-      dispatch(setAddresses({}));
-    };
   }, []);
   const { handleAddressModal } = useContext(ModalContext);
   return (
@@ -33,7 +30,7 @@ function Address() {
         + Add New Address
       </button>
       <div className="cardContainer grid grid-cols-3 gap-6">
-        {address.map((address, index) => {
+        {addresses.map((address, index) => {
           const { userName, userNumber, userAddress, documentID } = address;
           return (
             <div key={index} className={cardStyles}>
