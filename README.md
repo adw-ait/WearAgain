@@ -6,7 +6,7 @@
 
 **NOTE : Make a firebase config file with your credentials as _config.js_ and insert in **
 
-[config]: ./src/firebase/
+[config]: ./src/firebase/	"LINK"
 
 ### ScreenShots
 
