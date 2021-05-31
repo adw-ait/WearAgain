@@ -48,9 +48,9 @@ const ForgotPass = (props) => {
               type="email"
               name="email"
               value={email}
+              handleChange={(e) => setemail(e.target.value)}
               autoComplete="off"
               placeholder="E-mail"
-              onChange={(e) => setemail(e.target.value)}
             />
             <Button styles="p-1.5 rounded-lg text-white bg-purple-600 text-lg font-semibold hover:bg-purple-700">
               Submit

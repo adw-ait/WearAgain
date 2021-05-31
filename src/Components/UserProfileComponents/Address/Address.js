@@ -38,13 +38,13 @@ function Address() {
               <span className="phone">{userNumber}</span>
               <span className="address truncate">{userAddress}</span>
               <div className="buttons self-end flex gap-2">
-                <button
+                {/* <button
                   className={buttons}
                   onClick={(e) => handleAddressModal(e)}
                   name="Edit"
                 >
                   Edit
-                </button>
+                </button> */}
                 <button
                   className={deleteButton}
                   onClick={() => dispatch(deleteAddressStart(documentID))}
