@@ -17,6 +17,7 @@ import AdminLayout from "./Layout/AdminLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
+import Payment from "./pages/Payment/Payment";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -67,6 +68,15 @@ const App = (props) => {
             render={() => (
               <MainLayout>
                 <Cart />
+              </MainLayout>
+            )}
+            exact={true}
+          ></Route>
+          <Route
+            path="/payment"
+            render={() => (
+              <MainLayout>
+                <Payment />
               </MainLayout>
             )}
             exact={true}

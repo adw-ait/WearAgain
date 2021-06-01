@@ -7,6 +7,7 @@ import {
 } from "../../redux/Cart/cart.selectors";
 import { useSelector } from "react-redux";
 import CartItem from "../../Components/CartItem/CartItem";
+import { Link } from "react-router-dom";
 const mapState = createStructuredSelector({
   cartItems: selectCartItems,
   total: selectCartTotal,
@@ -14,7 +15,7 @@ const mapState = createStructuredSelector({
 });
 function Cart() {
   const { cartItems, total, totalNumCartItems } = useSelector(mapState);
-  console.log(cartItems);
+
   return (
     <div className="flex w-full p-14 justify-center ">
       {cartItems.length === 0 ? (
@@ -52,9 +53,12 @@ function Cart() {
                   className="my-5"
                   style={{ borderTop: ".12em solid gray" }}
                 />
-                <button className="bg-black p-1 rounded-md text-white ">
+                <Link
+                  to={{ pathname: "/payment" }}
+                  className="bg-black p-1 rounded-md text-white flex justify-center"
+                >
                   Checkout
-                </button>
+                </Link>
               </div>
             </div>
           </div>
