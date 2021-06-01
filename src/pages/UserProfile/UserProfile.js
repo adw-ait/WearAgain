@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Address from "../../Components/UserProfileComponents/Address/Address";
 import Orders from "../../Components/UserProfileComponents/Orders/Orders";
 import { listStyles, formInputs } from "./style";
 import { addNewAddressStart } from "./../../redux/Address/address.actions";
+import { getOrderDetailsStart } from "../../redux/Orders/orders.actions";
 export const ModalContext = React.createContext();
 
 const mapState = ({ user }) => ({
@@ -12,14 +13,26 @@ const mapState = ({ user }) => ({
 
 function UserProfile() {
   const [showAddressModal, setshowAddressModal] = useState(false);
-  const [whichContent, setwhichContent] = useState("address");
+  const [whichContent, setwhichContent] = useState("orders");
   const [modalTitle, setmodalTitle] = useState("");
   const [userName, setuserName] = useState("");
   const [userNumber, setuserNumber] = useState("");
   const [userAddress, setuserAddress] = useState("");
+  const [showOrderDetails, setshowOrderDetails] = useState(false);
+  const [ActiveOrderID, setActiveOrderID] = useState("");
 
   const dispatch = useDispatch();
   const { currentUser } = useSelector(mapState);
+
+  const handleShowOrderDetailsModal = () => {
+    setshowOrderDetails(!showOrderDetails);
+    // setActiveOrderID("");
+  };
+
+  const handleOrderDetails = (orderID) => {
+    setActiveOrderID(orderID);
+    setshowOrderDetails(!showOrderDetails);
+  };
 
   const handleAddressSubmit = (e) => {
     e.preventDefault();
@@ -77,6 +90,10 @@ function UserProfile() {
         userAddress,
         handleAddressForm,
         handleAddressSubmit,
+        handleShowOrderDetailsModal,
+        setshowOrderDetails,
+        handleOrderDetails,
+        ActiveOrderID,
       }}
     >
       <div className="flex w-full h-screen flex-col">
@@ -117,6 +134,7 @@ function UserProfile() {
           </div>
         </div>
         {showAddressModal && <Modal />}
+        {showOrderDetails && <OrderDetailsModal />}
       </div>
     </ModalContext.Provider>
   );
@@ -188,6 +206,77 @@ const Modal = () => {
             </button>
           </div>
         </form>
+      </div>
+      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+    </React.Fragment>
+  );
+};
+
+const orderMapState = ({ ordersData }) => ({
+  orderDetails: ordersData.orderDetails,
+});
+
+const OrderDetailsModal = () => {
+  const { handleShowOrderDetailsModal, ActiveOrderID } =
+    useContext(ModalContext);
+  const { orderDetails } = useSelector(orderMapState);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOrderDetailsStart(ActiveOrderID));
+  }, []);
+
+  return (
+    <React.Fragment>
+      {" "}
+      <div className="flex z-50 fixed justify-center w-full ">
+        <div
+          className="flex flex-col bg-white p-5 rounded-xl"
+          style={{ minHeight: "50vh", minWidth: "35vw" }}
+        >
+          <span className="flex justify-between">
+            <span className="text-2xl font-semibold">Order History</span>
+            <span
+              onClick={() => handleShowOrderDetailsModal()}
+              className="text-xl font-semibold cursor-pointer"
+            >
+              Close[x]
+            </span>
+          </span>
+          <hr className="my-5" />
+          <span className="font-semibold text-lg mb-5">
+            Order Number : #{ActiveOrderID}
+          </span>
+          <div className="flex flex-col gap-4">
+            {Array.isArray(orderDetails.orderItems) &&
+              orderDetails.orderItems.length > 0 &&
+              orderDetails.orderItems.map((orderDet, pos) => {
+                const {
+                  productName,
+                  productPrice,
+                  productThumbnail,
+                  quantity,
+                } = orderDet;
+                return (
+                  <React.Fragment key={pos}>
+                    <div className="flex w-full items-center justify-between border border-gray-400 rounded-lg px-5 py-2 text-lg font-medium">
+                      <div className="image overflow-hidden rounded-md">
+                        <img
+                          src={productThumbnail}
+                          alt=""
+                          className="object-contain "
+                          style={{ maxHeight: "8vh" }}
+                        />
+                      </div>
+                      <div className="name">{productName}</div>
+                      <div className="price">{productPrice}</div>
+                      <div className="price">{quantity}</div>
+                    </div>
+                  </React.Fragment>
+                );
+              })}
+          </div>
+        </div>
       </div>
       <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
     </React.Fragment>
