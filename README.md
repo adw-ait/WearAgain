@@ -35,3 +35,15 @@
 **UserProfile**
 
 ![UserProfile](./ScreenShots/UserProfile.png)
+
+**Payment Confirmation**
+
+![Payment](./ScreenShots/Payment.png)
+
+**Order History**
+
+![OrderHistory](./ScreenShots/OrderHistory.png)
+
+**Order Details**
+
+![OrderDetails](./ScreenShots/OrderDetails.png)
