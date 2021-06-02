@@ -7,10 +7,10 @@ function AdminLayout(props) {
   return (
     <React.Fragment>
       <Header {...props} />
-      <div className="flex">
-        <div className=" w-80 ">
+      <div className="flex ml-5">
+        {/* <div className=" w-80 ">
           <VerticalNav />
-        </div>
+        </div> */}
         <div className="ml-2 mt-10 ">
           <Admin />
         </div>
