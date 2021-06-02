@@ -66,18 +66,22 @@ const App = (props) => {
           <Route
             path="/cart"
             render={() => (
-              <MainLayout>
-                <Cart />
-              </MainLayout>
+              <WithAuth>
+                <MainLayout>
+                  <Cart />
+                </MainLayout>
+              </WithAuth>
             )}
             exact={true}
           ></Route>
           <Route
             path="/payment"
             render={() => (
-              <MainLayout>
-                <Payment />
-              </MainLayout>
+              <WithAuth>
+                <MainLayout>
+                  <Payment />
+                </MainLayout>
+              </WithAuth>
             )}
             exact={true}
           ></Route>
