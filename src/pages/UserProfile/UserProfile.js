@@ -5,6 +5,7 @@ import Orders from "../../Components/UserProfileComponents/Orders/Orders";
 import { listStyles, formInputs } from "./style";
 import { addNewAddressStart } from "./../../redux/Address/address.actions";
 import { getOrderDetailsStart } from "../../redux/Orders/orders.actions";
+import { useLocation } from "react-router";
 export const ModalContext = React.createContext();
 
 const mapState = ({ user }) => ({
@@ -12,8 +13,14 @@ const mapState = ({ user }) => ({
 });
 
 function UserProfile() {
+  const location = useLocation();
+
   const [showAddressModal, setshowAddressModal] = useState(false);
-  const [whichContent, setwhichContent] = useState("orders");
+  const [whichContent, setwhichContent] = useState(() => {
+    if (!location.state) return "address";
+    const { state } = location;
+    return state;
+  });
   const [modalTitle, setmodalTitle] = useState("");
   const [userName, setuserName] = useState("");
   const [userNumber, setuserNumber] = useState("");

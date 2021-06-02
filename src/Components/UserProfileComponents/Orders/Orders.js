@@ -5,12 +5,17 @@ import { cardStyles, desc } from "./style";
 
 import { getUserOrderHistory } from "./../../../redux/Orders/orders.actions";
 import { ModalContext } from "../../../pages/UserProfile/UserProfile";
+import { fetchAddressesStart } from "../../../redux/Address/address.actions";
 
 const mapState = ({ user, ordersData }) => ({
   currentUser: user.currentUser,
   orderHistory: ordersData.orderHistory.data,
 });
+
 function Orders() {
+  useEffect(() => {
+    dispatch(fetchAddressesStart());
+  }, []);
   const { handleOrderDetails } = useContext(ModalContext);
   const dispatch = useDispatch();
   const { currentUser, orderHistory } = useSelector(mapState);
@@ -24,7 +29,9 @@ function Orders() {
         {Array.isArray(orderHistory) &&
           orderHistory.length > 0 &&
           orderHistory.map((order, pos) => {
-            const { documentID, orderCreatedDate, orderTotal } = order;
+            const { documentID, orderCreatedDate, orderTotal, shippingAddrID } =
+              order;
+            console.log(shippingAddrID);
             return (
               <div
                 key={pos}
@@ -46,6 +53,24 @@ function Orders() {
                 <span className="ordertotal">
                   <span className={desc}>Total : </span>₹{orderTotal}
                 </span>
+                <div className="deliveryAddress">
+                  {shippingAddrID.map((address, index) => {
+                    const { userName, userAddress } = address;
+                    return (
+                      <React.Fragment>
+                        <span>
+                          <span className={desc}>Delivered to : </span>
+                          {userName}
+                        </span>
+                        <span>
+                          {" "}
+                          <span className={desc}>Address : </span>
+                          {userAddress}
+                        </span>
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
               </div>
             );
           })}
