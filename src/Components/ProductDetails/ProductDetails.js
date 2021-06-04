@@ -16,12 +16,8 @@ function ProductDetails() {
   const dispatch = useDispatch();
   const { product } = useSelector(mapState);
 
-  const {
-    productThumbnail,
-    productName,
-    productPrice,
-    productCategory,
-  } = product;
+  const { productThumbnail, productName, productPrice, productCategory } =
+    product;
   useEffect(() => {
     dispatch(fetchProductStart(productID));
     return () => {
@@ -60,7 +56,7 @@ function ProductDetails() {
                 add to cart
               </button>
               <Link
-                to={{ pathname: "/Home/ProductDetail/Edit" }}
+                to={{ pathname: `/product/:productID/edit` }}
                 className="bg-indigo-600 hover:bg-indigo-500 focus:outline-none transition text-white uppercase px-8 py-3"
               >
                 Edit

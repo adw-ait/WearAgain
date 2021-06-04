@@ -18,6 +18,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
 import Payment from "./pages/Payment/Payment";
+import EditModule from "./EditModule/EditModule";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -59,6 +60,15 @@ const App = (props) => {
             render={() => (
               <MainLayout>
                 <ProductDetails />
+              </MainLayout>
+            )}
+            exact={true}
+          ></Route>
+          <Route
+            path="/product/:productID/edit"
+            render={() => (
+              <MainLayout>
+                <EditModule />
               </MainLayout>
             )}
             exact={true}
