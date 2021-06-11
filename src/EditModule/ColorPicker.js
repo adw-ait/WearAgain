@@ -12,7 +12,7 @@ function ColorPicker() {
   return (
     <div>
       <HexColorPicker color={tshirtProps} onChange={changeColor} />
-      <h3>
+      {/* <h3>
         Current : <span id="copyThis">{tshirtProps}</span>
         <button
           className="copyBtn"
@@ -22,8 +22,8 @@ function ColorPicker() {
         >
           copy
         </button>
-      </h3>
-      <div>
+      </h3> */}
+      {/* <div>
         <input
           type="text"
           value={copyColor}
@@ -39,7 +39,7 @@ function ColorPicker() {
         >
           Change
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
