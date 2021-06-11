@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import ColorPicker from "./ColorPicker";
+import { Home } from "./EditModule";
 import ImagePicker from "./ImagePicker";
 import TextToCanvas from "./TextToCanvas";
 
 function Settings() {
+  const { handleSaveCanvas } = useContext(Home);
   const tabs = { colorPicker: true, imagePicker: false, text: false };
   const [display, setdisplay] = useState(tabs);
   const toggleDisplay = (e) => {
@@ -72,6 +74,12 @@ function Settings() {
       {display.colorPicker && <ColorPicker />}
       {display.imagePicker && <ImagePicker />}
       {display.text && <TextToCanvas />}
+      <button
+        className="border border-black p-2 rounded-md"
+        onClick={() => handleSaveCanvas()}
+      >
+        Save
+      </button>
     </div>
   );
 }

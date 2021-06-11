@@ -65,7 +65,7 @@ const App = (props) => {
             exact={true}
           ></Route>
           <Route
-            path="/product/:productID/edit"
+            path="/product/edit/:productID"
             render={() => (
               <MainLayout>
                 <EditModule />

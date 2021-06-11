@@ -6,7 +6,7 @@ function TshirtContainer() {
   const { tshirtProps } = useContext(Home);
 
   return (
-    <div className="tshirtContainer">
+    <div className="tshirtContainer" id="tshirtContainer">
       <div className="img-container" style={{ backgroundColor: tshirtProps }}>
         <img className="tshirt-img" src={tshirt} alt="" />
 
